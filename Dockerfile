@@ -16,6 +16,7 @@ RUN wget "https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 RUN tar -zxf "nginx-$NGINX_VERSION.tar.gz" && cd "nginx-$NGINX_VERSION"
 
 # Compile nginx
+RUN pwd && ls -la
 RUN ./configure \
   --prefix=/etc/nginx \
   --sbin-path=/usr/sbin/nginx \
