@@ -33,8 +33,6 @@ RUN cd "nginx-$NGINX_VERSION" \
     --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
     --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
     --with-perl_modules_path=/usr/lib/perl5/vendor_perl \
-    --user=nginx \
-    --group=nginx \
     --with-compat \
     --with-threads \
     --with-http_addition_module \
