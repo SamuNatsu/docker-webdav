@@ -46,7 +46,7 @@ RUN rm -rf nginx-http-auth-digest nginx-dav-ext-module "nginx-$NGINX_VERSION"
 RUN apk add --no-cache pcre zlib openssl libxml2 libxslt
 
 # Copy files
-COPY default.conf /etc/nginx/cond.d/default.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 COPY entrypoint.sh /
 RUN chmod +x entrypoint.sh
 
