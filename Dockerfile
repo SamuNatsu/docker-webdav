@@ -13,11 +13,10 @@ RUN git clone https://github.com/mid1221213/nginx-dav-ext-module
 
 # Get nginx source code
 RUN wget "https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
-RUN tar -zxf "nginx-$NGINX_VERSION.tar.gz" && cd "nginx-$NGINX_VERSION"
+RUN tar -zxf "nginx-$NGINX_VERSION.tar.gz"
 
 # Compile nginx
-RUN pwd && ls -la
-RUN ./configure \
+RUN "/nginx-$NGINX_VERSION/configure" \
   --prefix=/etc/nginx \
   --sbin-path=/usr/sbin/nginx \
   --modules-path=/usr/lib/nginx/modules \
