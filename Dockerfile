@@ -5,7 +5,7 @@ FROM alpine:latest
 ARG NGINX_VERSION=1.26.0
 
 # Install build dependencies
-RUN apk update && apk add build-base pcre-dev zlib-dev openssl-dev libxml2-dev libxslt-dev
+RUN apk update && apk add git build-base pcre-dev zlib-dev openssl-dev libxml2-dev libxslt-dev
 
 # Clone source code from github
 RUN git clone https://github.com/atomx/nginx-http-auth-digest
@@ -65,7 +65,7 @@ RUN ./configure \
 RUN make -j && make install
 
 # Clean up build dependencies
-RUN apk del build-base pcre-dev zlib-dev openssl-dev libxml2-dev libxslt-dev
+RUN apk del git build-base pcre-dev zlib-dev openssl-dev libxml2-dev libxslt-dev
 
 # Start up command
 CMD nginx -g "daemon off;"
