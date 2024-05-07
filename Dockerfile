@@ -60,10 +60,14 @@ RUN cd "/nginx-$NGINX_VERSION" && make -j && make install
 
 # Clean up build dependencies
 RUN apk del git build-base pcre-dev zlib-dev openssl-dev libxml2-dev libxslt-dev
+RUN rm -rf nginx-http-auth-digest
+RUN rm -rf nginx-dav-ext-module
+RUN rm -rf "/nginx-$NGINX_VERSION"
 
 # Copy files
 COPY default.conf /etc/nginx/cond.d/default.conf
 COPY entrypoint.sh /
+RUN chmod +x entrypoint.sh
 
 # Start up command
 CMD /entrypoint.sh
