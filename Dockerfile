@@ -5,7 +5,7 @@ FROM alpine:latest
 ARG NGINX_VERSION=1.26.0
 
 # Install build dependencies
-RUN apk update && apk add git build-base pcre-dev zlib-dev openssl-dev libxml2-dev libxslt-dev
+RUN apk update && apk add --no-cache git build-base pcre-dev zlib-dev openssl-dev libxml2-dev libxslt-dev
 
 # Clone source code from github
 RUN git clone https://github.com/atomx/nginx-http-auth-digest
@@ -56,10 +56,15 @@ RUN cd "/nginx-$NGINX_VERSION" && ./configure \
   --with-ld-opt='-Wl,--as-needed,-O1,--sort-common -Wl,-z,pack-relative-relocs' \
   --add-module=../nginx-http-auth-digest \
   --add-module=../nginx-dav-ext-module
-RUN make -j && make install
+RUN cd "/nginx-$NGINX_VERSION" && make -j && make install
+RUN nginx -V
 
 # Clean up build dependencies
 RUN apk del git build-base pcre-dev zlib-dev openssl-dev libxml2-dev libxslt-dev
 
+# Copy files
+COPY default.conf /etc/nginx/cond.d/default.conf
+COPY entrypoint.sh /
+
 # Start up command
-CMD nginx -g "daemon off;"
+CMD /entrypoint.sh
