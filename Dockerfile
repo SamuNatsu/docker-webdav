@@ -57,7 +57,6 @@ RUN cd "/nginx-$NGINX_VERSION" && ./configure \
   --add-module=../nginx-http-auth-digest \
   --add-module=../nginx-dav-ext-module
 RUN cd "/nginx-$NGINX_VERSION" && make -j && make install
-RUN nginx -V
 
 # Clean up build dependencies
 RUN apk del git build-base pcre-dev zlib-dev openssl-dev libxml2-dev libxslt-dev
